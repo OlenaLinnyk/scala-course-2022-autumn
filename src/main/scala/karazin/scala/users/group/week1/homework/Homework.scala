@@ -40,27 +40,115 @@ object Homework :
 
   object `Boolean Operators` :
 
-    def not(b: Boolean): Boolean = ??? // here is my greatest solution
+    def not(b: Boolean): Boolean =
+      if (b == true)
+      then false
+      else true  // here is my greatest solution
 
-    def and(left: Boolean, right: Boolean): Boolean = ???
+    def and(left: Boolean, right: Boolean): Boolean =
+      if (left == true)
+      then right
+      else false
 
-    def or(left: Boolean, right: Boolean): Boolean = ???
+    def or(left: Boolean, right: Boolean): Boolean =
+      if (left == false)
+      then right
+      else true
 
   end `Boolean Operators`
 
   object `Fermat Numbers` :
 
-    val multiplication: (BigInt, BigInt) => BigInt = ???
+    val mult: (BigInt, BigInt, BigInt) => BigInt = (x, y, res) =>
+      if ((x<=0) || (y<=0))
+        then res
+      else mult(x-1, y, res+y)
 
-    val power: (BigInt, BigInt) => BigInt = ???
+    val multiplication: (BigInt, BigInt) => BigInt = (a, b) => mult(a,b,0)
 
-    val fermatNumber: Int => BigInt = ???
+    val pow: (BigInt, BigInt, BigInt) => BigInt = (aa, n, result) =>
+      if (n==0)
+        then result
+      else pow(aa, n-1, multiplication(aa, result))
+
+    val power: (BigInt, BigInt) => BigInt = (a, b) => pow(a, b, 1)
+
+    val fermatNumber: BigInt => BigInt = n => (power(2, power(2, n)) + 1)
+    println("fermatNumber(10)")
+    println(fermatNumber(10))
 
   end `Fermat Numbers`
 
   object `Look-and-say Sequence` :
-    val lookAndSaySequenceElement: Int => BigInt = ???
+    //val lookAndSaySequenceElement: BigInt => BigInt = ???
+
+    def xnext(res: BigInt, x: BigInt): BigInt =
+      if x == 0
+        then res
+        else
+        {
+          if ((x%10)!=((x/10)%10))
+          then
+            {
+              xnext((res*10+(x%10))*10+1, x/10)
+            }
+          else
+            if (((x/100)%10)!=((x/10)%10))
+            then
+              {
+                xnext((res*10+(x%10))*10+2, x/100)
+              }
+            else
+              {
+                xnext((res*10+(x%10))*10+3, x/1000)
+              }
+        }
+
+    def reverse(res: BigInt, a: BigInt):BigInt = if a == 0 then res else reverse(res*10+(a%10), a/10)
+
+    def lookAndSaySequenceEl(n: BigInt, x: BigInt): BigInt = if n == 0 then x else lookAndSaySequenceEl(n-1, reverse(0, xnext(0, x)))
+    def lookAndSaySequenceElement(n: BigInt): BigInt = lookAndSaySequenceEl(n-1, 1)
+    println("lookAndSaySequenceElement(15)")
+    println(lookAndSaySequenceElement(15))
 
   end `Look-and-say Sequence`
+
+  object `KolakoskiSequence`:
+
+    def kolakoskiSequenceEl(n:Int, s:String, res:String, i:Int, j:Int): String =
+      if (n==0)
+        then res
+      else{
+        if (s(i)=='1')
+          then{
+          if (s(j)=='2')
+            then kolakoskiSequenceEl(n-1, s+"1", res+s(i), i+1, j+1)
+          else kolakoskiSequenceEl(n-1, s+"2", res+s(i), i+1, j+1)
+        }
+        else{
+          if (s(j) == '2')
+            then kolakoskiSequenceEl(n - 1, s + "11", res+s(i), i + 1, j + 2)
+          else kolakoskiSequenceEl(n - 1, s + "22", res+s(i), i + 1, j + 2)
+        }
+      }
+    def kolakoskiSequenceElement(n: Int): String =
+      if (n==1)
+        then "1"
+      else
+        {
+          if (n==2)
+            then "12"
+          else
+            {
+              if (n==3)
+                then "122"
+              else kolakoskiSequenceEl(n-2, "122", "12", 2, 2)
+            }
+        }
+    println("kolakoskiSequenceElement(20)")
+    println(kolakoskiSequenceElement(20))
+
+  end `KolakoskiSequence`
+
 
 end Homework
