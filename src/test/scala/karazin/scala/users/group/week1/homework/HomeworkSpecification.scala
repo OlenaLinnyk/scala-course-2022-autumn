@@ -5,15 +5,17 @@ import Prop.{forAll, propBoolean}
 import Homework._
 import karazin.scala.users.group.week1.homework.arbitraries
 
-object HomeworkSpecification extends Properties("Homework"):
+object HomeworkSpecification extends Properties("Homework") :
 
   include(BooleanOperatorsSpecification)
   include(FermatNumbersSpecification)
   include(LookAndAaSequenceSpecification)
+  include(KolakoskiSequenceSpecification)
 
 end HomeworkSpecification
 
-object BooleanOperatorsSpecification extends Properties("Boolean Operators"):
+object BooleanOperatorsSpecification extends Properties("Boolean Operators") :
+
   import `Boolean Operators`._
 
   property("not") = forAll { (b: Boolean) =>
@@ -22,19 +24,20 @@ object BooleanOperatorsSpecification extends Properties("Boolean Operators"):
 
   property("and") = forAll { (pair: (Boolean, Boolean)) =>
     val (left, right) = pair
-    
+
     and(left, right) == (left && right)
   }
 
   property("or") = forAll { (pair: (Boolean, Boolean)) =>
     val (left, right) = pair
-    
+
     or(left, right) == (left || right)
-  }   
+  }
 
 end BooleanOperatorsSpecification
 
-object FermatNumbersSpecification extends Properties("Fermat Numbers"):
+object FermatNumbersSpecification extends Properties("Fermat Numbers") :
+
   import `Fermat Numbers`._
   import arbitraries.given Arbitrary[Int]
 
@@ -54,7 +57,8 @@ object FermatNumbersSpecification extends Properties("Fermat Numbers"):
 
 end FermatNumbersSpecification
 
-object LookAndAaSequenceSpecification extends Properties("Look-and-say Sequence"):
+object LookAndAaSequenceSpecification extends Properties("Look-and-say Sequence") :
+
   import `Look-and-say Sequence`._
   import arbitraries.given Arbitrary[Int]
 
@@ -66,11 +70,12 @@ object LookAndAaSequenceSpecification extends Properties("Look-and-say Sequence"
     lookAndSaySequenceElement(5) == 111221
     lookAndSaySequenceElement(6) == 312211
     lookAndSaySequenceElement(7) == 13112221
-  }  
+  }
 
 end LookAndAaSequenceSpecification
 
-object KolakoskiSequenceSpecification extends Properties("KolakoskiSequence"):
+object KolakoskiSequenceSpecification extends Properties("KolakoskiSequence") :
+
   import `KolakoskiSequence`._
   import arbitraries.given Arbitrary[Int]
 
@@ -86,7 +91,6 @@ object KolakoskiSequenceSpecification extends Properties("KolakoskiSequence"):
     kolakoskiSequenceElement(9) == "122112122"
     kolakoskiSequenceElement(10) == "1221121221"
   }
-  //println(kolakoskiSequenceElement(5))
 
 end KolakoskiSequenceSpecification
 
