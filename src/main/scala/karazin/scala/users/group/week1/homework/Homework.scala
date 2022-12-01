@@ -56,16 +56,6 @@ object Homework:
       then right
       else true
 
-    /*def andExtra(left: Boolean, right: => Boolean): Boolean =
-      if (left == true)
-      then right
-      else false
-
-    def orExtra(left: Boolean, right: => Boolean): Boolean =
-      if (left == false)
-      then right
-      else true*/
-
   end `Boolean Operators`
 
   object `Fermat Numbers`:
