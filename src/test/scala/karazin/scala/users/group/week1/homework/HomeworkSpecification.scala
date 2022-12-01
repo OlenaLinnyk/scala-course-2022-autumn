@@ -28,10 +28,18 @@ object BooleanOperatorsSpecification extends Properties("Boolean Operators") :
     and(left, right) == (left && right)
   }
 
+  property("andTestForRightValue") = propBoolean {
+    and(false, throw Exception("Error")) == false
+  }
+
   property("or") = forAll { (pair: (Boolean, Boolean)) =>
     val (left, right) = pair
 
     or(left, right) == (left || right)
+  }
+
+  property("orTestForRightValue") = propBoolean {
+    or(true, throw Exception("Error")) == true
   }
 
 end BooleanOperatorsSpecification
