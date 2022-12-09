@@ -60,6 +60,8 @@ object Homework:
       case that: Rational => ((this.numer == that.numer) && (this.denom == that.denom))
       case _ => false
     }
+    override def hashCode:
+    Int = (7 * this.numer + 31 * this.denom) * 31 + 13
 
   end Rational
 

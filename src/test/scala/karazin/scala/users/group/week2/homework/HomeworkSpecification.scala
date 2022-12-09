@@ -66,7 +66,7 @@ object HomeworkSpecification extends Properties("Homework") :
 
   property("division by zero") = forAll { (left: Rational, int: Int) =>
     throws(classOf[IllegalArgumentException]) {
-      left / Rational(int, 0)
+      left / Rational(0, int)
     }
   }
 
